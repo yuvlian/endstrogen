@@ -1,0 +1,5 @@
+target/
+*.proto
+*.cs
+*.ps1
+!Endfield.proto
