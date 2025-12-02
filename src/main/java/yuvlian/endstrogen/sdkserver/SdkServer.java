@@ -2,7 +2,7 @@ package yuvlian.endstrogen.sdkserver;
 
 import com.sun.net.httpserver.HttpServer;
 import java.net.InetSocketAddress;
-import yuvlian.endstrogen.sdkserver.utils.HandlerRegistrar;
+import yuvlian.endstrogen.sdkserver.handlers.HandlerRegistrar;
 
 public class SdkServer {
     public static void start() throws Exception {

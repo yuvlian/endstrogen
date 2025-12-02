@@ -57,13 +57,13 @@ public abstract class BaseHandler implements HttpHandler {
             case "OPTIONS": options(x); break;
             default: methodNotAllowed(x);
         }
-        x.close();
     }
 
     public void methodNotAllowed(HttpExchange x) throws IOException {
         byte[] msg = "Method Not Allowed".getBytes();
         x.sendResponseHeaders(405, msg.length);
         x.getResponseBody().write(msg);
+        x.close();
         setStatus(405);
     }
 }

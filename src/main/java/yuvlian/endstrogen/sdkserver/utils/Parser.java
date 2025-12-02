@@ -2,7 +2,7 @@ package yuvlian.endstrogen.sdkserver.utils;
 
 import com.sun.net.httpserver.HttpExchange;
 import tools.jackson.databind.ObjectMapper;
-import java.io.InputStream;
+import java.io.IOException;
 import java.net.URLDecoder;
 import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
@@ -11,9 +11,12 @@ import java.util.Map;
 public class Parser {
     private static final ObjectMapper mapper = new ObjectMapper();
 
-    public static <T> T parseJsonBody(HttpExchange x, Class<T> cls) throws Exception {
-        InputStream is = x.getRequestBody();
-        return mapper.readValue(is, cls);
+    public static <T> T parseJsonBody(HttpExchange x, Class<T> cls) throws IOException {
+        return mapper.readValue(x.getRequestBody(), cls);
+    }
+
+    public static <T> String toJsonString(T obj) throws IOException {
+        return mapper.writeValueAsString(obj);
     }
 
     public static Map<String, String> parseQueryParams(HttpExchange x) {
