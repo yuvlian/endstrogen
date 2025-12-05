@@ -10,7 +10,7 @@ public abstract class BaseHandler implements HttpHandler {
 
   protected int statusCode = 200;
 
-  protected void setStatus(int code) {
+  protected void setStatusCode(int code) {
     this.statusCode = code;
   }
 
@@ -76,10 +76,10 @@ public abstract class BaseHandler implements HttpHandler {
   }
 
   public void methodNotAllowed(HttpExchange x) throws IOException {
+    setStatusCode(405);
     byte[] msg = "Method Not Allowed".getBytes(StandardCharsets.UTF_8);
-    x.sendResponseHeaders(405, msg.length);
+    x.sendResponseHeaders(getStatusCode(), msg.length);
     x.getResponseBody().write(msg);
     x.close();
-    setStatus(405);
   }
 }

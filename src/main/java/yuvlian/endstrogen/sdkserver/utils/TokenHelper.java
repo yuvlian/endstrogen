@@ -17,13 +17,13 @@ public class TokenHelper {
     }
 
     long timestamp = Instant.now().getEpochSecond();
-    sb.append("+").append(timestamp);
+    sb.append(".").append(timestamp);
 
     return sb.toString();
   }
 
   public static long parseTokenTimestamp(String token) throws Exception {
-    int plusIndex = token.lastIndexOf('+');
+    int plusIndex = token.lastIndexOf('.');
     if (plusIndex < 0) {
       throw new Exception("invalid token format");
     }

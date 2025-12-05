@@ -73,7 +73,7 @@ public class AuthTokenByEmail extends BaseHandler {
     } finally {
       // i assume setting 500 wont make msg show ingame.
       // no point setting manually for each branch.
-      setStatus(200);
+      setStatusCode(200);
       out = Parser.toJsonString(rsp).getBytes(StandardCharsets.UTF_8);
       x.getResponseHeaders().add("Content-Type", "application/json");
       x.sendResponseHeaders(getStatusCode(), out.length);
