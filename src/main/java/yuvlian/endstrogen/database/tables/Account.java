@@ -10,18 +10,21 @@ public class Account {
     private final String username;
     private final String passwordHash;
     private final String token;
+    private final boolean isBanned;
 
-    private Account(int uid, String username, String passwordHash, String token) {
+    private Account(int uid, String username, String passwordHash, String token, boolean isBanned) {
         this.uid = uid;
         this.username = username;
         this.passwordHash = passwordHash;
         this.token = token;
+        this.isBanned = isBanned;
     }
 
     public int getUid() { return uid; }
     public String getUsername() { return username; }
     public String getPasswordHash() { return passwordHash; }
     public String getToken() { return token; }
+    public boolean isBanned() { return isBanned; }
 
     public static String getTableQuery() {
         return """
@@ -29,7 +32,8 @@ public class Account {
                 uid INTEGER PRIMARY KEY AUTOINCREMENT,
                 username TEXT UNIQUE NOT NULL,
                 password_hash TEXT NOT NULL,
-                token TEXT UNIQUE NOT NULL
+                token TEXT UNIQUE NOT NULL,
+                is_banned BOOLEAN NOT NULL DEFAULT 0,
             )
         """;
     }
@@ -40,7 +44,8 @@ public class Account {
                 ((Number) row.get("uid")).intValue(),
                 (String) row.get("username"),
                 (String) row.get("password_hash"),
-                (String) row.get("token")
+                (String) row.get("token"),
+                ((Number) row.get("is_banned")).intValue() != 0
             );
         }
 
@@ -67,8 +72,8 @@ public class Account {
 
         public static Account createAccount(String username, String passwordHash, String token) throws SQLException {
             Database.exec(
-                "INSERT INTO accounts (username, password_hash, token) VALUES (?, ?, ?)",
-                username, passwordHash, token
+                "INSERT INTO accounts (username, password_hash, token, is_banned) VALUES (?, ?, ?, ?)",
+                username, passwordHash, token, false
             );
             return getByUsername(username);
         }
@@ -85,6 +90,14 @@ public class Account {
             Database.exec(
                 "UPDATE accounts SET token = ? WHERE uid = ?",
                 newToken, uid
+            );
+            return getByUid(uid);
+        }
+
+        public static Account updateBanStatusByUid(int uid, boolean banned) throws SQLException {
+            Database.exec(
+                "UPDATE accounts SET is_banned = ? WHERE uid = ?",
+                banned, uid
             );
             return getByUid(uid);
         }

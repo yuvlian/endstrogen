@@ -3,6 +3,7 @@ package yuvlian.endstrogen.sdkserver.handlers;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 
 public abstract class BaseHandler implements HttpHandler {
     public abstract String route();
@@ -60,7 +61,7 @@ public abstract class BaseHandler implements HttpHandler {
     }
 
     public void methodNotAllowed(HttpExchange x) throws IOException {
-        byte[] msg = "Method Not Allowed".getBytes();
+        byte[] msg = "Method Not Allowed".getBytes(StandardCharsets.UTF_8);
         x.sendResponseHeaders(405, msg.length);
         x.getResponseBody().write(msg);
         x.close();

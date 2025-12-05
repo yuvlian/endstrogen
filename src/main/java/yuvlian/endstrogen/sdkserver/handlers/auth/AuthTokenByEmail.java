@@ -2,6 +2,7 @@ package yuvlian.endstrogen.sdkserver.handlers.auth;
 
 import com.sun.net.httpserver.HttpExchange;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import yuvlian.endstrogen.sdkserver.handlers.BaseHandler;
 import yuvlian.endstrogen.sdkserver.handlers.BaseResponse;
 import yuvlian.endstrogen.sdkserver.utils.Parser;
@@ -13,7 +14,7 @@ public class AuthTokenByEmail extends BaseHandler {
         public String password;
     }
 
-    public static class Data {
+    public static class ResponseData {
         public String token;
     }
 
@@ -26,14 +27,14 @@ public class AuthTokenByEmail extends BaseHandler {
     public void post(HttpExchange x) throws IOException {
         try {
             Request req = Parser.parseJsonBody(x, Request.class);
-            Data data = new Data();
+            ResponseData data = new ResponseData();
             data.token = req.password;
 
-            BaseResponse<Data> rsp = new BaseResponse<>();
+            BaseResponse<ResponseData> rsp = new BaseResponse<>();
             rsp.data = data;
 
             String json = Parser.toJsonString(rsp);
-            byte[] out = json.getBytes("UTF-8");
+            byte[] out = json.getBytes(StandardCharsets.UTF_8);
 
             x.getResponseHeaders().add("Content-Type", "application/json");
             x.sendResponseHeaders(200, out.length);
@@ -47,7 +48,7 @@ public class AuthTokenByEmail extends BaseHandler {
             rsp.type = "X";
 
             String json = Parser.toJsonString(rsp);
-            byte[] out = json.getBytes("UTF-8");
+            byte[] out = json.getBytes(StandardCharsets.UTF_8);
 
             x.getResponseHeaders().add("Content-Type", "application/json");
             x.sendResponseHeaders(400, out.length);

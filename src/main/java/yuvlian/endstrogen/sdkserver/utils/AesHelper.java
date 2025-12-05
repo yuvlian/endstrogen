@@ -3,6 +3,7 @@ package yuvlian.endstrogen.sdkserver.utils;
 import javax.crypto.Cipher;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
+import java.nio.charset.StandardCharsets;
 import java.security.SecureRandom;
 import java.util.Base64;
 
@@ -22,7 +23,7 @@ public class AesHelper {
 
         cipher.init(Cipher.ENCRYPT_MODE, keySpec, ivSpec);
 
-        byte[] ciphertext = cipher.doFinal(plainText.getBytes("UTF-8"));
+        byte[] ciphertext = cipher.doFinal(plainText.getBytes(StandardCharsets.UTF_8));
 
         byte[] output = new byte[iv.length + ciphertext.length];
         System.arraycopy(iv, 0, output, 0, iv.length);
