@@ -3,3 +3,4 @@ target/
 *.cs
 *.ps1
 !Endfield.proto
+*.db
