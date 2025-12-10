@@ -6,7 +6,11 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 
 public abstract class BaseHandler implements HttpHandler {
-  public abstract String route();
+  public abstract String[] routes();
+
+  public abstract class Request {}
+
+  public abstract class ResponseData {}
 
   protected int statusCode = 200;
 

@@ -15,8 +15,8 @@ public class QueryZoneWhitelist extends BaseHandler {
   }
 
   @Override
-  public String route() {
-    return "/game/user/v1/query_zone_whitelist";
+  public String[] routes() {
+    return new String[] {"/game/user/v1/query_zone_whitelist"};
   }
 
   @Override

@@ -27,8 +27,8 @@ public class AuthTokenByChannel extends BaseHandler {
   }
 
   @Override
-  public String route() {
-    return "/u8/user/auth/v2/token_by_channel_token";
+  public String[] routes() {
+    return new String[] {"/u8/user/auth/v2/token_by_channel_token"};
   }
 
   @Override

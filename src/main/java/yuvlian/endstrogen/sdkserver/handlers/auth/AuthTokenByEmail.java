@@ -22,8 +22,8 @@ public class AuthTokenByEmail extends BaseHandler {
   }
 
   @Override
-  public String route() {
-    return "/user/auth/v1/token_by_email_password";
+  public String[] routes() {
+    return new String[] {"/user/auth/v1/token_by_email_password"};
   }
 
   @Override

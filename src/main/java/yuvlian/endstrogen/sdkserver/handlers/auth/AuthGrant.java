@@ -20,8 +20,8 @@ public class AuthGrant extends BaseHandler {
   }
 
   @Override
-  public String route() {
-    return "/u8/user/auth/v2/grant";
+  public String[] routes() {
+    return new String[] {"/u8/user/auth/v2/grant"};
   }
 
   @Override

@@ -13,8 +13,8 @@ public class CheckWhitelist extends BaseHandler {
   public static class ResponseData {}
 
   @Override
-  public String route() {
-    return "/user/oauth2/v1/check_whitelist";
+  public String[] routes() {
+    return new String[] {"/user/oauth2/v1/check_whitelist"};
   }
 
   @Override

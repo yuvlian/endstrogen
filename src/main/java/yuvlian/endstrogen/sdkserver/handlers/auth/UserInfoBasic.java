@@ -9,8 +9,7 @@ import yuvlian.endstrogen.sdkserver.handlers.BaseResponse;
 import yuvlian.endstrogen.sdkserver.utils.Parser;
 
 public class UserInfoBasic extends BaseHandler {
-  // it's get && query
-  // public static class Request {}
+  public static class Request {}
 
   public static class ResponseData {
     public String hdId;
@@ -21,8 +20,8 @@ public class UserInfoBasic extends BaseHandler {
   }
 
   @Override
-  public String route() {
-    return "/user/info/v1/basic";
+  public String[] routes() {
+    return new String[] {"/user/info/v1/basic"};
   }
 
   @Override
